@@ -1,0 +1,181 @@
+<link rel="stylesheet" href="/shipScores.css" />
+<script nonce="WhoKjUOm0SVmcCr3RTAQCwMuAJv9heJxHKMYHI9sxno=" src="/fileInput.js" defer></script>
+<script nonce="WhoKjUOm0SVmcCr3RTAQCwMuAJv9heJxHKMYHI9sxno=" src="/shipScores.js" defer=""></script>
+<!-- Search -->
+<div role="search" aria-labelledby="linerSearchLabel" class="browse-search mrgn-bttm-md">
+  <label id="linerSearchLabel" for="linerSearch" class="control-label">{{ snippets['ethi-ship-scores-search-label'] }}</label>
+  <p id="linerSearchHelp" class="wb-inv">{{ snippets['ethi-ship-scores-search-help'] }}</p>
+  <input id="linerSearch" type="search" placeholder="Type a cruise line name" autocomplete="off" spellcheck="false" aria-describedby="linerSearchHelp linerSearchStatus" class="form-control browse-search__input" /><!-- Live status message (JS writes textContent here) -->
+  <p id="linerSearchStatus" role="status" aria-live="polite" aria-atomic="true" class="browse-search__status mrgn-tp-sm"></p>
+  <!-- i18n strings for JS (NO Liquid in attributes; keep as plain text nodes) --><span id="shipScores_i18n" class="wb-inv"><span id="shipScores_status_template">{{ snippets['ethi-ship-scores-search-status-template'] }}</span><span id="shipScores_status_none">{{ snippets['ethi-ship-scores-search-status-none'] }}</span><span id="shipScores_status_cleared">{{ snippets['ethi-ship-scores-search-status-cleared'] }}</span></span>
+</div>
+<!-- Tree -->
+<div class="browse-page-frame">
+  <div id="browseTree" class="browse-tree">
+    <!-- Liner A -->
+    <details class="browse-tree__liner">
+      <summary class="browse-tree__summary">Demo Cruise Liner A</summary>
+      <div class="browse-tree__panel">
+        <!-- Ship A-1 -->
+        <details class="browse-tree__ship">
+          <summary class="browse-tree__summary">Demo Ship A-1</summary>
+          <div class="ship-details">
+            <h3 id="shipA1_info_title" class="ship-details__title">{{ snippets['ethi-ship-scores-vessel-info'] }}</h3>
+            <section data-ship-focus="info" role="region" aria-labelledby="shipA1_info_title" class="ship-details__info-box">
+              <dl class="ship-details__dl">
+                <div class="ship-details__row">
+                  <dt>{{ snippets['ethi-ship-scores-cruise-line'] }}</dt>
+                  <dd>Demo Cruise Liner A</dd>
+                </div>
+                <div class="ship-details__row">
+                  <dt>{{ snippets['ethi-ship-scores-vessel-type'] }}</dt>
+                  <dd>Cruise Ship</dd>
+                </div>
+                <div class="ship-details__row">
+                  <dt>{{ snippets['ethi-ship-scores-vessel-weight'] }}</dt>
+                  <dd>120001 - 140000</dd>
+                </div>
+              </dl>
+            </section>
+            <h3 id="shipA1_hist_title" class="ship-details__title">{{ snippets['ethi-ship-scores-vessel-history'] }}</h3>
+            <section data-ship-focus="history" role="region" aria-labelledby="shipA1_hist_title" class="ship-details__history">
+              <table class="ship-details__table table table-striped table-hover">
+                <caption class="wb-inv">
+                  {{ snippets['ethi-ship-scores-table-caption'] }}<span> (</span
+                  >{{ snippets['ethi-ship-scores-date-format-hint'] }}<span>) </span>
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      {{ snippets['ethi-ship-scores-date-of-inspection'] }}<span class="wb-inv"><span>(</span>{{ snippets['ethi-ship-scores-date-format-hint'] }}<span>)</span></span>
+                    </th>
+                    <th scope="col">{{ snippets['ethi-ship-scores-score-obtained'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025-07-10</td>
+                    <td>98/100</td>
+                  </tr>
+                  <tr>
+                    <td>2024-08-08</td>
+                    <td>98/100</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </details>
+        <!-- Ship A-2 -->
+        <details class="browse-tree__ship">
+          <summary class="browse-tree__summary">Demo Ship A-2</summary>
+          <div class="ship-details">
+            <h3 id="shipA2_info_title" class="ship-details__title">{{ snippets['ethi-ship-scores-vessel-info'] }}</h3>
+            <section data-ship-focus="info" role="region" aria-labelledby="shipA2_info_title" class="ship-details__info-box">
+              <dl class="ship-details__dl">
+                <div class="ship-details__row">
+                  <dt>{{ snippets['ethi-ship-scores-cruise-line'] }}</dt>
+                  <dd>Demo Cruise Liner A</dd>
+                </div>
+                <div class="ship-details__row">
+                  <dt>{{ snippets['ethi-ship-scores-vessel-type'] }}</dt>
+                  <dd>Cruise Ship</dd>
+                </div>
+                <div class="ship-details__row">
+                  <dt>{{ snippets['ethi-ship-scores-vessel-weight'] }}</dt>
+                  <dd>100001 - 120000</dd>
+                </div>
+              </dl>
+            </section>
+            <h3 id="shipA2_hist_title" class="ship-details__title">{{ snippets['ethi-ship-scores-vessel-history'] }}</h3>
+            <section data-ship-focus="history" role="region" aria-labelledby="shipA2_hist_title" class="ship-details__history">
+              <table class="ship-details__table table table-striped table-hover">
+                <caption class="wb-inv">
+                  {{ snippets['ethi-ship-scores-table-caption'] }}<span> (</span
+                  >{{ snippets['ethi-ship-scores-date-format-hint'] }}<span>) </span>
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      {{ snippets['ethi-ship-scores-date-of-inspection'] }}<span class="wb-inv"><span>(</span>{{ snippets['ethi-ship-scores-date-format-hint'] }}<span>)</span></span>
+                    </th>
+                    <th scope="col">{{ snippets['ethi-ship-scores-score-obtained'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025-10-01</td>
+                    <td>90/100</td>
+                  </tr>
+                  <tr>
+                    <td>2025-07-12</td>
+                    <td>85/100</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </details>
+      </div>
+    </details>
+    <!-- Liner B -->
+    <details class="browse-tree__liner">
+      <summary class="browse-tree__summary">Demo Cruise Liner B</summary>
+      <div class="browse-tree__panel">
+        <!-- Ship B-1 -->
+        <details class="browse-tree__ship">
+          <summary class="browse-tree__summary">Demo Ship B-1</summary>
+          <div class="ship-details">
+            <h3 id="shipB1_info_title" class="ship-details__title">{{ snippets['ethi-ship-scores-vessel-info'] }}</h3>
+            <section data-ship-focus="info" role="region" aria-labelledby="shipB1_info_title" class="ship-details__info-box">
+              <dl class="ship-details__dl">
+                <div class="ship-details__row">
+                  <dt>{{ snippets['ethi-ship-scores-cruise-line'] }}</dt>
+                  <dd>Demo Cruise Liner B</dd>
+                </div>
+                <div class="ship-details__row">
+                  <dt>{{ snippets['ethi-ship-scores-vessel-type'] }}</dt>
+                  <dd>Cruise Ship</dd>
+                </div>
+                <div class="ship-details__row">
+                  <dt>{{ snippets['ethi-ship-scores-vessel-weight'] }}</dt>
+                  <dd>140001 - 160000</dd>
+                </div>
+              </dl>
+            </section>
+            <h3 id="shipB1_hist_title" class="ship-details__title">{{ snippets['ethi-ship-scores-vessel-history'] }}</h3>
+            <section data-ship-focus="history" role="region" aria-labelledby="shipB1_hist_title" class="ship-details__history">
+              <table class="ship-details__table table table-striped table-hover">
+                <caption class="wb-inv">
+                  {{ snippets['ethi-ship-scores-table-caption'] }}<span> (</span
+                  >{{ snippets['ethi-ship-scores-date-format-hint'] }}<span>) </span>
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      {{ snippets['ethi-ship-scores-date-of-inspection'] }}<span class="wb-inv"><span>(</span>{{ snippets['ethi-ship-scores-date-format-hint'] }}<span>)</span></span>
+                    </th>
+                    <th scope="col">{{ snippets['ethi-ship-scores-score-obtained'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025-09-05</td>
+                    <td>94/100</td>
+                  </tr>
+                  <tr>
+                    <td>2025-06-11</td>
+                    <td>89/100</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </details>
+      </div>
+    </details>
+  </div>
+</div>
+<div class="row sectionBlockLayout text-start" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 8px;">
+  <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap;"><div class="col-lg-12 columnBlockLayout" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 250px;"></div></div>
+</div>
