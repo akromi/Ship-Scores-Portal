@@ -1,0 +1,417 @@
+/* shipScores.css — Updated 2026-02-26
+ *
+ * Changes from review:
+ * - M4: Added .browse-tree__loading and .browse-tree__error styles
+ * - L3: Documented all !important usages with justification comments
+ * - Minor: Consolidated duplicate summary.browse-tree__summary blocks
+ */
+
+:root{
+  --ship-indent: 2.5rem;
+  --branch-x: 1.25rem;
+  --inner-indent: 1rem;
+  --gc-yellow: #ffbf47;
+
+  /* Space between triangle icon and label text */
+  --node-icon-gap: .55rem;
+
+  /* WET4-ish focus blues */
+  --wet-focus-blue: #2b6cb0;   /* outline */
+  --wet-focus-halo: #bcdcff;   /* outer halo */
+}
+
+
+/* ============================================================
+   Search
+   ============================================================ */
+.browse-search{
+  max-width: 520px;
+
+  /* Right-align the search row (label + input), keep help/status full width */
+  display: grid;
+  grid-template-columns: auto minmax(18rem, 28rem);
+  justify-content: end;
+  align-items: center;
+  column-gap: 0.75rem;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.browse-search__status{
+  margin-bottom: 0;
+  font-size: 1.32rem;
+}
+
+.browse-search__input.form-control{
+  border: 1px solid #d8d8d8;
+  border-radius: 6px;
+
+  background-color: #fff;
+  background-image: linear-gradient(#fff, #f3f3f3);
+
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 rgba(0,0,0,0.03);
+}
+
+
+/* WET4 blue focus for search
+ * !important: Override GCWeb default focus styles to maintain
+ * consistent WET4 blue focus ring across all interactive elements. */
+.browse-search__input.form-control:focus,
+.browse-search__input.form-control:focus-visible{
+  outline: 3px solid var(--wet-focus-blue) !important;     /* GCWeb override */
+  outline-offset: 2px !important;                           /* GCWeb override */
+  box-shadow:
+    0 0 0 4px var(--wet-focus-halo),
+    0 1px 2px rgba(0,0,0,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 rgba(0,0,0,0.03) !important;            /* GCWeb override */
+}
+
+.browse-search label{
+  margin: 0;
+  white-space: nowrap;
+}
+
+.browse-search input[type="search"],
+.browse-search input[type="text"]{
+  width: 100%;
+}
+
+/* Help + live status should span full width under the row */
+#linerSearchHelp,
+.browse-search__status{
+  grid-column: 1 / -1;
+}
+
+
+/* ============================================================
+   Search magnifier icon (LEFT inside input)
+   - Uses Font Awesome style clean icon via SVG data URI
+   - Visible by default
+   - Disappears on focus (click/keyboard) or when typing
+   ============================================================ */
+
+/* Hide any external search icon (Font Awesome or other) */
+.browse-search label i,
+.browse-search label .fa,
+.browse-search label .fas,
+.browse-search label .fa-search,
+.browse-search label svg,
+.browse-search__icon,
+.browse-search label::before{
+  display: none !important;  /* Override library icon injection */
+}
+
+/* Default (not focused): show icon on the LEFT inside input
+ * !important: Override Power Pages default padding/background which
+ * interferes with the custom search icon positioning. */
+.browse-search__input,
+.browse-search__input.form-control,
+.browse-search input[type="search"],
+.browse-search input[type="text"],
+#linerSearch {
+  padding-left: 2.6rem !important;                          /* Power Pages override */
+
+  /* Clean Font Awesome style magnifying glass */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23495057' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='10.5' cy='10.5' r='7'/%3E%3Cline x1='21' y1='21' x2='15.5' y2='15.5'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;                  /* Power Pages override */
+  background-position: 0.75rem 50% !important;              /* Power Pages override */
+  background-size: 1.35rem 1.35rem !important;              /* Power Pages override */
+  background-color: #fff;
+}
+
+/* Focus: icon disappears, reclaim space for typing
+ * !important: Must override the default state !important above. */
+.browse-search__input:focus,
+.browse-search__input.form-control:focus,
+.browse-search input[type="search"]:focus,
+.browse-search input[type="text"]:focus,
+#linerSearch:focus,
+.browse-search__input:focus-visible,
+#linerSearch:focus-visible{
+  background-image: none !important;                        /* Override default state */
+  padding-left: 0.75rem !important;                         /* Override default state */
+}
+
+/* When input has text (not empty), keep icon hidden
+ * !important: Must override the default state !important above. */
+.browse-search__input:not(:placeholder-shown),
+.browse-search input[type="search"]:not(:placeholder-shown),
+.browse-search input[type="text"]:not(:placeholder-shown),
+#linerSearch:not(:placeholder-shown){
+  background-image: none !important;                        /* Override default state */
+  padding-left: 0.75rem !important;                         /* Override default state */
+}
+
+/* Small screens: stack */
+@media (max-width: 480px){
+  .browse-search{
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+  }
+}
+
+
+/* ============================================================
+   Main frame
+   ============================================================ */
+.browse-page-frame{
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background: #fff;
+  margin-top: 0.5rem;
+  padding: 1.25rem;
+  box-shadow:
+    0 2px 10px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.85);
+  overflow: visible; /* Allow focus rings to show */
+}
+
+
+/* ============================================================
+   Tree container
+   ============================================================ */
+#browseTree{
+  width: 100%;
+  padding: 0.9rem 0.9rem 0.9rem 1.4rem; /* Extra left padding for focus rings */
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   M4: Loading skeleton + H2: Error state
+   ============================================================ */
+.browse-tree__loading{
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #6f6f6f;
+  font-size: 1.1rem;
+}
+
+.browse-tree__loading p{
+  margin: 0;
+}
+
+.browse-tree__error{
+  padding: 1.5rem 1rem;
+}
+
+.browse-tree__error p{
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+
+/* ============================================================
+   Details containers
+   ============================================================ */
+details.browse-tree__liner,
+details.browse-tree__ship{
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 0 !important;          /* Override WET4 <details> default border */
+  box-shadow: none !important;    /* Override WET4 <details> default shadow */
+  background: transparent !important; /* Override WET4 <details> bg */
+  padding: 0;
+  margin: 0 0 .85rem 0;
+}
+
+.browse-tree__panel{ margin-top: .7rem; }
+
+
+/* ============================================================
+   Tree node disclosure (NATIVE browser marker)
+   ============================================================ */
+summary.browse-tree__summary{
+  list-style: revert;
+  padding-left: 0;
+}
+
+/* Restore default marker */
+summary.browse-tree__summary::-webkit-details-marker{ display: revert; }
+summary.browse-tree__summary::marker{ content: normal; }
+
+/* No custom icon */
+summary.browse-tree__summary::before{ content: none !important; } /* Override WET4 custom markers */
+
+
+/* ============================================================
+   Summary row
+   ============================================================ */
+summary.browse-tree__summary{
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  /* Room for icon + extra gap */
+  padding: .45rem .75rem .45rem calc(1.85rem + var(--node-icon-gap));
+
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  background: linear-gradient(#fff, #f3f3f3);
+  border: 1px solid #d8d8d8;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 rgba(0,0,0,0.03);
+  width: 100%;
+  box-sizing: border-box;
+  outline-offset: 2px;
+}
+
+/* No underline on hover/focus */
+summary.browse-tree__summary:hover,
+summary.browse-tree__summary:focus{
+  text-decoration: none;
+}
+
+/* WET4 blue focus ring for tree nodes
+ * !important: Override GCWeb default focus styles to maintain
+ * consistent WET4 blue focus ring (3px outline + 4px halo). */
+summary.browse-tree__summary:focus,
+summary.browse-tree__summary:focus-visible,
+summary.browse-tree__summary:focus:not(:focus-visible){
+  outline: 3px solid var(--wet-focus-blue) !important;     /* GCWeb override */
+  outline-offset: 2px !important;                           /* GCWeb override */
+  box-shadow:
+    0 0 0 4px var(--wet-focus-halo),
+    0 1px 2px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 rgba(0,0,0,0.03) !important;            /* GCWeb override */
+}
+
+
+/* ============================================================
+   Ship indentation + branch line
+   ============================================================ */
+details.browse-tree__ship{ position: relative; }
+
+details.browse-tree__ship::before{
+  content:"";
+  position:absolute;
+  left: var(--branch-x);
+  top: .2rem;
+  bottom: .2rem;
+  width: 0;
+  border-left: 2px solid #e6e6e6;
+}
+
+details.browse-tree__ship > summary.browse-tree__summary{
+  margin-left: var(--ship-indent);
+  width: calc(100% - var(--ship-indent)) !important;  /* Override 100% from base rule */
+}
+
+/* Ship expanded panel */
+details.browse-tree__ship > :not(summary){
+  margin-left: var(--ship-indent);
+  width: calc(100% - var(--ship-indent));
+  box-sizing: border-box;
+  padding-left: var(--inner-indent);
+  border-left: 2px solid #f0f0f0;
+}
+
+
+/* ============================================================
+   Ship details
+   ============================================================ */
+.ship-details{ margin-top: .25rem; }
+
+.ship-details__title{
+  font-size: 1em;
+  font-weight: 700;
+  margin: 1rem 0 .5rem;
+  padding-bottom: .25rem;
+  border-bottom: 1px solid #d9e3ef;
+}
+
+.ship-details__dl{ margin: 0; }
+.ship-details__row{ display: flex; flex-wrap: wrap; gap: .35rem 1rem; margin: .2rem 0; }
+.ship-details__row dt{ font-weight: 700; min-width: 140px; }
+.ship-details__row dd{ margin: 0; }
+
+.ship-details__info-box{
+  border: 2px solid #bdbdbd;
+  padding: .75rem 1rem;
+  background: #fff;
+  margin-bottom: 1.25rem;
+  max-width: 780px;
+}
+
+
+/* ============================================================
+   Font size hierarchy: Liner > Vessel > Details
+   ============================================================ */
+
+/* Liner names - larger, prominent */
+details.browse-tree__liner > summary.browse-tree__summary{
+  font-size: 1.55rem;
+}
+
+/* Vessel/Ship names - slightly smaller than liners */
+details.browse-tree__ship > summary.browse-tree__summary{
+  font-size: 1.32rem;
+}
+
+/* Vessel details content - comfortable reading size */
+.ship-details,
+.ship-details__row,
+.ship-details__row dt,
+.ship-details__row dd{
+  font-size: 1.28rem;
+}
+
+/* Vessel section titles - match vessel name size */
+.ship-details__title{
+  font-size: 1.28rem;
+}
+
+/* Inspection history table */
+.ship-details__table{
+  font-size: 1.21rem;
+}
+
+.ship-details__table thead th{
+  font-size: 1.21rem;
+  font-weight: 600;
+}
+
+.ship-details__table tbody td{
+  font-size: 0.85rem;
+}
+
+
+/* ============================================================
+   WET4 blue focus rings when JS tabs into regions
+   !important: Override GCWeb defaults for consistent focus presentation.
+   ============================================================ */
+.ship-details__info-box[tabindex]:focus,
+.ship-details__history[tabindex]:focus,
+.ship-details__title[tabindex]:focus{
+  outline: 3px solid var(--wet-focus-blue) !important;     /* GCWeb override */
+  outline-offset: 2px !important;                           /* GCWeb override */
+  box-shadow: 0 0 0 4px var(--wet-focus-halo) !important;  /* GCWeb override */
+}
+
+
+/* ============================================================
+   Semantic headings inside <summary> (QA: h2 liner, h3 ship)
+   Keep visuals unchanged (no extra margins / no block layout)
+   ============================================================ */
+.browse-tree__summary .browse-tree__heading{
+  display: inline;
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+/* Match inspection history table headers to vessel name size */
+.ship-details__table th,
+.ship-details__table td{
+  font-size: 1em;
+}
